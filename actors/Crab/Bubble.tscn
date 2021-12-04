@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=1]
+[ext_resource path="res://actors/Crab/Bubble.gd" type="Script" id=2]
+[ext_resource path="res://spriteSheet/Bullet_2.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8.79895, 9.3487 )
+
+[node name="Bubble" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Node2D" parent="."]
+scale = Vector2( 0.8, 0.8 )
+
+[node name="Sprite" type="Sprite" parent="Sprite"]
+scale = Vector2( 1.02311, 1.00774 )
+texture = ExtResource( 3 )
+
+[node name="RegularPolygon2D" type="Node2D" parent="."]
+visible = false
+script = ExtResource( 1 )
+centered = true
+num_sides = 10
+size = 32.0
+polygon_color = Color( 0.811765, 0.972549, 1, 1 )
+border_size = 5.0
+border_color = Color( 0.223529, 1, 1, 1 )
+
+[node name="Bubble_Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bubble_Hitbox"]
+shape = SubResource( 1 )

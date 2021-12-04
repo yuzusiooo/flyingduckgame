@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=1]
+[ext_resource path="res://actors/Smallducks/Egg.gd" type="Script" id=2]
+[ext_resource path="res://spriteSheet/Egg.png" type="Texture" id=3]
+
+[sub_resource type="Animation" id=3]
+resource_name = "Loop"
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Egg:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -18.1472 ), Vector2( 0, -20.5069 ), Vector2( 0, -18.1472 ) ]
+}
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 24.0
+height = 16.0
+
+[node name="Egg" type="Node2D"]
+script = ExtResource( 2 )
+speed = 200
+
+[node name="Sprite" type="Node2D" parent="."]
+scale = Vector2( 0.4, 0.4 )
+
+[node name="Egg" type="Sprite" parent="Sprite"]
+position = Vector2( 0, -7.50055 )
+scale = Vector2( 1, 1.0835 )
+texture = ExtResource( 3 )
+
+[node name="Anim" type="AnimationPlayer" parent="Sprite"]
+autoplay = "Loop"
+anims/Loop = SubResource( 3 )
+
+[node name="RegularPolygon2D" type="Node2D" parent="."]
+visible = false
+scale = Vector2( 1, 1.36 )
+script = ExtResource( 1 )
+centered = true
+num_sides = 8
+size = 32.0
+polygon_color = Color( 1, 1, 1, 1 )
+border_size = 2.0
+border_color = Color( 0.521569, 0.521569, 0.521569, 1 )
+
+[node name="Egg_Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Egg_Hitbox"]
+shape = SubResource( 2 )

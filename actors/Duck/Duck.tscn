@@ -1,0 +1,257 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=1]
+[ext_resource path="res://actors/Duck/Duck.gd" type="Script" id=2]
+[ext_resource path="res://spriteSheet/Duck_6.png" type="Texture" id=3]
+[ext_resource path="res://spriteSheet/Duck_5.png" type="Texture" id=4]
+[ext_resource path="res://spriteSheet/Duck_1.png" type="Texture" id=5]
+[ext_resource path="res://spriteSheet/Duck_3.png" type="Texture" id=6]
+[ext_resource path="res://spriteSheet/Duck_4.png" type="Texture" id=7]
+[ext_resource path="res://spriteSheet/Duck_7.png" type="Texture" id=8]
+
+[sub_resource type="Animation" id=3]
+resource_name = "WingLoop"
+length = 0.2
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Wing1:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ), ExtResource( 8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Wing1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -40.5, -26 ), Vector2( 23.4803, 26.7557 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Wing2:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 3 ), ExtResource( 8 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Wing2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -2.5, -44 ), Vector2( 59.4086, 27.433 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "HeadIdle"
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Head:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 6 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "HeadShoot"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Head:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.01, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 6 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Head:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.01, 0.03, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 50, -61 ), Vector2( 56.364, -64.182 ), Vector2( 59.8995, -67.0104 ), Vector2( 50, -63.8284 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "WingLoop"
+length = 0.2
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Wing1:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ), ExtResource( 8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Wing1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -40.5, -26 ), Vector2( 23.4803, 26.7557 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Wing2:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 3 ), ExtResource( 8 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Wing2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -2.5, -44 ), Vector2( 59.4086, 27.433 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 20, 24 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 9.24344, 11.0088 )
+
+[node name="Duck" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Node2D" parent="."]
+scale = Vector2( 0.5, 0.5 )
+
+[node name="Wing2" type="Sprite" parent="Sprite"]
+position = Vector2( -2.5, -44 )
+texture = ExtResource( 3 )
+
+[node name="Head" type="Sprite" parent="Sprite"]
+position = Vector2( 50, -61 )
+texture = ExtResource( 6 )
+
+[node name="Body" type="Sprite" parent="Sprite"]
+position = Vector2( -9, 16 )
+texture = ExtResource( 5 )
+
+[node name="Wing1" type="Sprite" parent="Sprite"]
+position = Vector2( -40.5, -26 )
+texture = ExtResource( 4 )
+
+[node name="WingAnim" type="AnimationPlayer" parent="Sprite"]
+autoplay = "WingLoop"
+anims/WingLoop = SubResource( 3 )
+
+[node name="HeadAnim" type="AnimationPlayer" parent="Sprite"]
+autoplay = "HeadIdle"
+anims/HeadIdle = SubResource( 4 )
+anims/HeadShoot = SubResource( 5 )
+anims/WingLoop = SubResource( 6 )
+
+[node name="RegularPolygon2D" type="Node2D" parent="."]
+visible = false
+script = ExtResource( 1 )
+centered = true
+polygon_color = Color( 0.741176, 0.588235, 0.407843, 1 )
+border_size = 5.0
+polygon_rotation = 90.0
+
+[node name="ShootTimer" type="Timer" parent="."]
+
+[node name="Freefly_Timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="BreadCounter" type="RichTextLabel" parent="."]
+visible = false
+margin_left = -71.0
+margin_top = -80.0
+margin_right = 72.0
+margin_bottom = -40.0
+text = "Bread"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EggCounter" type="RichTextLabel" parent="."]
+visible = false
+margin_left = 32.9748
+margin_top = -80.0
+margin_right = 175.975
+margin_bottom = -40.0
+text = "Egg"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BoundBox" type="CollisionShape2D" parent="."]
+position = Vector2( 4, 0 )
+shape = SubResource( 1 )
+
+[node name="Duck_Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Duck_Hitbox"]
+position = Vector2( -6.63616, -0.0912075 )
+shape = SubResource( 2 )
+
+[node name="iframe_timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="ShootPoint" type="Node2D" parent="."]
+position = Vector2( 29.3449, -29.6985 )
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
+[connection signal="timeout" from="Freefly_Timer" to="." method="_on_Freefly_Timer_timeout"]
+[connection signal="area_entered" from="Duck_Hitbox" to="." method="_on_Duck_Hitbox_area_entered"]
+[connection signal="timeout" from="iframe_timer" to="." method="_on_iframe_timer_timeout"]

@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=1]
+[ext_resource path="res://actors/Bread.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 24, 24 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 256.125
+
+[node name="Bread" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="RegularPolygon2D" type="Node2D" parent="."]
+script = ExtResource( 1 )
+centered = true
+num_sides = 4
+size = 40.0
+polygon_color = Color( 1, 0.858824, 0.772549, 1 )
+border_size = 8.0
+border_color = Color( 0.784314, 0.329412, 0, 1 )
+polygon_rotation = 45.0
+
+[node name="Bread_Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bread_Hitbox"]
+shape = SubResource( 1 )
+
+[node name="PickupRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupRange"]
+shape = SubResource( 2 )
+
+[connection signal="area_entered" from="PickupRange" to="." method="_on_PickupRange_area_entered"]

@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=1]
+[ext_resource path="res://actors/Duck/Pellet.gd" type="Script" id=2]
+[ext_resource path="res://spriteSheet/Bullet_1.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 16.0
+
+[node name="Pellet" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="RegularPolygon2D" type="Node2D" parent="."]
+visible = false
+script = ExtResource( 1 )
+centered = true
+num_sides = 8
+size = 30.0
+polygon_color = Color( 1, 0.494118, 0, 1 )
+border_size = 5.0
+border_color = Color( 1, 0.796078, 0, 1 )
+
+[node name="Pellet_Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pellet_Hitbox"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+
+[connection signal="area_entered" from="Pellet_Hitbox" to="." method="_on_Pellet_Hitbox_area_entered"]

@@ -1,0 +1,154 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=1]
+[ext_resource path="res://actors/Smallducks/SmallDuck.gd" type="Script" id=2]
+[ext_resource path="res://spriteSheet/SmallDuck_3.png" type="Texture" id=3]
+[ext_resource path="res://spriteSheet/SmallDuck_1.png" type="Texture" id=4]
+[ext_resource path="res://spriteSheet/SmallDuck_2.png" type="Texture" id=5]
+[ext_resource path="res://spriteSheet/SmallDuck_4.png" type="Texture" id=6]
+
+[sub_resource type="Animation" id=1]
+resource_name = "WingLoop"
+length = 0.1
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ), ExtResource( 5 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -12.0136, 8.34274 ), Vector2( -12.0136, -18.1455 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "HeadIdle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Head:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 3 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "HeadShoot"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Head:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.02, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 3 ), ExtResource( 6 ), ExtResource( 3 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Head:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.02, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 16.6855, -30.0339 ), Vector2( 21.9828, -30.8285 ), Vector2( 19.0693, -29.769 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "WingLoop"
+length = 0.1
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ), ExtResource( 5 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -12.0136, 8.34274 ), Vector2( -12.0136, -18.1455 ) ]
+}
+
+[node name="SmallDuck" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="RegularPolygon2D" type="Node2D" parent="."]
+visible = false
+script = ExtResource( 1 )
+centered = true
+size = 42.0
+polygon_color = Color( 0.988235, 0.811765, 0, 1 )
+border_size = 5.0
+polygon_rotation = 90.0
+
+[node name="ShootTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="Sprite" type="Node2D" parent="."]
+scale = Vector2( 0.5, 0.5 )
+
+[node name="Body" type="Sprite" parent="Sprite"]
+position = Vector2( -12.0136, -18.1455 )
+texture = ExtResource( 5 )
+
+[node name="Head" type="Sprite" parent="Sprite"]
+position = Vector2( 19.0693, -29.769 )
+texture = ExtResource( 3 )
+
+[node name="WingAnim" type="AnimationPlayer" parent="Sprite"]
+autoplay = "WingLoop"
+anims/WingLoop = SubResource( 1 )
+
+[node name="HeadAnim" type="AnimationPlayer" parent="Sprite"]
+autoplay = "HeadIdle"
+anims/HeadIdle = SubResource( 2 )
+anims/HeadShoot = SubResource( 4 )
+anims/WingLoop = SubResource( 3 )
+
+[node name="ShootPoint" type="Node2D" parent="."]
+position = Vector2( 14.1703, -13.1109 )
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]

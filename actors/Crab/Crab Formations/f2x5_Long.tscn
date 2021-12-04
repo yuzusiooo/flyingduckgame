@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://actors/Crab/Crab Formations/Formations.gd" type="Script" id=1]
+
+[node name="1x3" type="Node2D"]
+script = ExtResource( 1 )
+spawns = [ NodePath("Crab1"), NodePath("Crab2"), NodePath("Crab3"), NodePath("Crab4"), NodePath("Crab5"), NodePath("Crab6"), NodePath("Crab7"), NodePath("Crab8") ]
+
+[node name="IntervalTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="Despawn" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
+autostart = true
+
+[node name="Crab1" type="Node2D" parent="."]
+position = Vector2( 0, -256 )
+
+[node name="Crab2" type="Node2D" parent="."]
+position = Vector2( 0, 192 )
+
+[node name="Crab3" type="Node2D" parent="."]
+position = Vector2( 256, -256 )
+
+[node name="Crab4" type="Node2D" parent="."]
+position = Vector2( 256, 192 )
+
+[node name="Crab5" type="Node2D" parent="."]
+position = Vector2( 512, -256 )
+
+[node name="Crab6" type="Node2D" parent="."]
+position = Vector2( 512, 192 )
+
+[node name="Crab7" type="Node2D" parent="."]
+position = Vector2( 768, -256 )
+
+[node name="Crab8" type="Node2D" parent="."]
+position = Vector2( 768, 192 )
+
+[connection signal="timeout" from="IntervalTimer" to="." method="_on_IntervalTimer_timeout"]
+[connection signal="timeout" from="Despawn" to="." method="_on_Despawn_timeout"]

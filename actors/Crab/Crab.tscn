@@ -1,0 +1,145 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=1]
+[ext_resource path="res://actors/Crab/Crab.gd" type="Script" id=2]
+[ext_resource path="res://actors/Crab/Crab_Behaviour.gd" type="Script" id=3]
+[ext_resource path="res://spriteSheet/Crab_2.png" type="Texture" id=4]
+[ext_resource path="res://spriteSheet/Crab_4.png" type="Texture" id=5]
+[ext_resource path="res://spriteSheet/Crab_1.png" type="Texture" id=6]
+[ext_resource path="res://spriteSheet/Crab_3.png" type="Texture" id=7]
+
+[sub_resource type="Animation" id=4]
+resource_name = "Loop"
+length = 0.8
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 6 ), ExtResource( 4 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 15.1694, 6.74195 ), Vector2( 29.6062, 11.1614 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Arm:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 7 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Arm:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.41 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -47.8679, -11.4613 ), Vector2( -46.6894, -19.1216 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Shoot"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Arm:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -47.8679, -11.4613 ), Vector2( -69.0811, 4.74322 ), Vector2( -47.5733, -16.7646 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Arm:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ ExtResource( 7 ), ExtResource( 5 ), ExtResource( 7 ) ]
+}
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 32.249
+
+[node name="Crab" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="RegularPolygon2D" type="Node2D" parent="."]
+visible = false
+script = ExtResource( 1 )
+centered = true
+num_sides = 5
+polygon_color = Color( 1, 0.513726, 0, 1 )
+border_size = 5.0
+border_color = Color( 1, 0, 0, 1 )
+
+[node name="Behaviour" type="Node2D" parent="."]
+script = ExtResource( 3 )
+
+[node name="Sprite" type="Node2D" parent="Behaviour"]
+scale = Vector2( 0.6, 0.6 )
+
+[node name="Arm" type="Sprite" parent="Behaviour/Sprite"]
+position = Vector2( -47.5733, -16.7646 )
+texture = ExtResource( 7 )
+
+[node name="Body" type="Sprite" parent="Behaviour/Sprite"]
+position = Vector2( 15.1694, 6.74195 )
+texture = ExtResource( 6 )
+
+[node name="Anim" type="AnimationPlayer" parent="Behaviour/Sprite"]
+autoplay = "Loop"
+anims/Loop = SubResource( 4 )
+anims/Shoot = SubResource( 2 )
+
+[node name="ShootTimer" type="Timer" parent="Behaviour"]
+wait_time = 3.0
+
+[node name="Crab_Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Crab_Hitbox"]
+shape = SubResource( 3 )
+
+[node name="Despawn" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
+autostart = true
+
+[node name="Eggpos" type="Node2D" parent="."]
+position = Vector2( 0, -64 )
+
+[connection signal="timeout" from="Behaviour/ShootTimer" to="Behaviour" method="_on_ShootTimer_timeout"]
+[connection signal="area_entered" from="Crab_Hitbox" to="." method="_on_Hitbox_area_entered"]
+[connection signal="timeout" from="Despawn" to="." method="_on_Despawn_timeout"]
